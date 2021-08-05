@@ -3,9 +3,19 @@ const router = express.Router();
 
 const controller = require("../controllers/users.controller");
 
-// SignUp/Register(User)
+// Create(User)
 
-router.post("/student/signup", controller.registerStudent);
-// router.post("/teacher/signup", controller.registerTeacher);
+router.post("/student/create", controller.createStudent);
+router.post("/teacher/create", controller.createTeacher);
+
+//Find All
+router.get("/",  controller.getAll);
+//Find Single User
+router.get("/:id",  controller.getSingle);
+//Update User
+router.put("/:id/update", controller.update);
+//Delete User
+router.delete("/:id/delete", controller.delete);
+
 
 module.exports = router;
