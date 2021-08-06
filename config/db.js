@@ -5,7 +5,7 @@ dotenv.config();
 const atlas = process.env.MONGO_URI_ATLAS;
 
 const db = mongoose
-  .connect( atlas, {
+  .connect(atlas, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
     useFindAndModify: false,

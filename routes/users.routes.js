@@ -13,9 +13,8 @@ router.get("/",  controller.getAll);
 //Find Single User
 router.get("/:id",  controller.getSingle);
 //Update User
-router.put("/:id/update", controller.update);
+router.put("/:id", controller.update);
 //Delete User
-router.delete("/:id/delete", controller.delete);
-
+router.delete("/:id", controller.delete);
 
 module.exports = router;

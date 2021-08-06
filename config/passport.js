@@ -15,7 +15,7 @@ passport.use(
           if (!user) {
             const error = new Error("A user with this email does not exist");
             error.statusCode = 401;
-           throw error;
+            throw error;
           }
           if (!user.validatePassword(password)) {
             const error = new Error("Password is incorrect");
@@ -24,7 +24,7 @@ passport.use(
           }
 
           // console.log(user);
-           next(null, user);
+          next(null, user);
         })
         .catch((err) => {
           next(err);

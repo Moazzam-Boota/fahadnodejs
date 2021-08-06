@@ -25,6 +25,7 @@
     "mongodb": "^4.1.0",
     "mongoose": "^5.13.5",
     "nodemon": "^2.0.12",
+    "parse-full-name": "^1.2.5",
     "passport": "^0.4.1"
   }
 }

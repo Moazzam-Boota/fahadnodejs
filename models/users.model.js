@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
-const jwt = require("jsonwebtoken");
 const crypto = require("crypto");
 require("dotenv").config();
 
 const Model = new Schema(
   {
-    fullName: {
-      type: String,
-    },
+    id: { type: String },
+
+    fullName: { type: String, default: null },
+
     email: {
       type: String,
     },
@@ -19,15 +19,15 @@ const Model = new Schema(
       type: String,
     },
 
-    userType:[
+    userType: [
       {
         type: String,
       },
     ],
-    userIds:[
+    assignedCourses: [
       {
-        type: mongoose.Schema.Types.ObjectId ,
-        ref: 'Course',
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course",
       },
     ],
 
@@ -46,7 +46,6 @@ const Model = new Schema(
     timestamps: true,
     // collection: "users",
   }
-
 );
 Model.methods.setPassword = function (password) {
   this.local.salt = crypto.randomBytes(16).toString("hex");
@@ -54,7 +53,5 @@ Model.methods.setPassword = function (password) {
     .pbkdf2Sync(password, this.local.salt, 128, 128, "sha512")
     .toString("hex");
 };
-
-
 
 module.exports = mongoose.model("User", Model);

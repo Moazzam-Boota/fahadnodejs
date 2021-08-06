@@ -9,13 +9,8 @@ router.get("/",  controller.getAll);
 
 router.get("/:id",  controller.getSingle);
 
-router.put("/:id/update", controller.update);
+router.put("/:id", controller.update);
 
-router.delete("/:id/delete", controller.delete);
-
-// Assign(Course)
-router.post("/assign/student", controller.assignCourseToStudent);
-router.post("/assign/teacher", controller.assignCourseToTeacher);
-
+router.delete("/:id", controller.delete);
 
 module.exports = router;
