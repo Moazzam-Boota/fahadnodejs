@@ -4,13 +4,14 @@ const User = require("../models/users.model");
 
 passport.use(
   "local",
-  new LocalStrategy(
-    {
+  new LocalStrategy({
       usernameField: "email",
       passwordField: "password",
     },
     (email, password, next) => {
-      User.findOne({ email: email })
+      User.findOne({
+          email: email
+        })
         .then((user) => {
           if (!user) {
             const error = new Error("A user with this email does not exist");

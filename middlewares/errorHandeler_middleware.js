@@ -5,9 +5,14 @@ exports.errorHandeler = (error, req, res, next) => {
     status = 500;
     message = "Network Error " + error.message;
   }
-  res.status(status).json({ status: status, message: message });
+  res.status(status).json({
+    status: status,
+    message: message
+  });
 };
 
 exports.handleMissingRecord = (res) => {
-  return res.status(404).json({ message: "Record not Found" });
+  return res.status(404).json({
+    message: "Record not Found"
+  });
 };

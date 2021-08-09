@@ -1,6 +1,3 @@
-// const passport = require("passport");
-// const bcrypt = require('bcryptjs');
-const usersModel = require("../models/users.model");
 const coursesModel = require("../models/courses.model");
 const handeler = require("../middlewares/errorHandeler_middleware");
 
@@ -8,7 +5,6 @@ require("dotenv").config();
 
 exports.registerCourse = (req, res, next) => {
   const body = req.body;
-  console.log(body);
 
   // Ensuring that all the fields are being input by the user according to the model's requirements
   if (!body.email || !body.password) {
@@ -25,8 +21,7 @@ exports.registerCourse = (req, res, next) => {
       if (userDoc) {
         const error = new Error(
           `Sorry, a course already exists with the courseCode: ${body.courseCode} `
-        );
-        {
+        ); {
           res.json({
             success: true,
             msg: "Course already existed",
@@ -50,6 +45,7 @@ exports.registerCourse = (req, res, next) => {
             id: result._id,
             message: `Course is registered Successfully!: ${body.courseName} `,
           });
+          console.log("Course is registered Successfully!");
         })
         .catch((err) => {
           next(err);
@@ -63,7 +59,9 @@ exports.registerCourse = (req, res, next) => {
 exports.getAll = (req, res, next) => {
   coursesModel
     .find(req.query)
-    .select({ local: 0 })
+    .select({
+      local: 0,
+    })
     .populate("course")
     .exec((err, items) => {
       if (err) return next(err);
@@ -71,14 +69,16 @@ exports.getAll = (req, res, next) => {
         return handeler.handleMissingRecord(res);
       }
       res.send(items);
-      console.log(items);
+      console.log("Done");
     });
 };
 
 exports.getSingle = (req, res, next) => {
   coursesModel
     .findById(req.params.id)
-    .select({ local: 0 })
+    .select({
+      local: 0,
+    })
     .populate("course")
     .exec((err, item) => {
       if (err) return next(err);
@@ -87,12 +87,13 @@ exports.getSingle = (req, res, next) => {
       }
       res.send(item);
     });
+  console.log("Done");
+
 };
 
 exports.update = (req, res, next) => {
   coursesModel.findByIdAndUpdate(
-    req.params.id,
-    {
+    req.params.id, {
       $set: req.body,
     },
     (err, item) => {
@@ -103,6 +104,8 @@ exports.update = (req, res, next) => {
       res.status(200).json({
         message: "Course information updated Successfully!",
       });
+      console.log("Course information updated Successfully!");
+
     }
   );
 };
@@ -116,5 +119,7 @@ exports.delete = (req, res, next) => {
     res.status(200).json({
       message: "Course deleted Successfully!",
     });
+    console.log("Course deleted Successfully!");
+
   });
 };

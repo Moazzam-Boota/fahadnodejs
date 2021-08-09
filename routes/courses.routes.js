@@ -5,9 +5,9 @@ const controller = require("../controllers/courses.controller");
 //Signup/Register(Course)
 router.post("/register", controller.registerCourse);
 
-router.get("/",  controller.getAll);
+router.get("/", controller.getAll);
 
-router.get("/:id",  controller.getSingle);
+router.get("/:id", controller.getSingle);
 
 router.put("/:id", controller.update);
 
