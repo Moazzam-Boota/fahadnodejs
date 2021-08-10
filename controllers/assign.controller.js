@@ -41,7 +41,7 @@ exports.assignCourseToStudent = (req, res, next) => {
   );
   res.json({
     success: true,
-        msg: "Course assigned to Student successfully !",
+    msg: "Course assigned to Student successfully !",
   });
 };
 
@@ -84,6 +84,6 @@ exports.assignCourseToTeacher = (req, res, next) => {
   );
   res.json({
     success: true,
-        msg: "Course assigned to Teacher successfully !",
+    msg: "Course assigned to Teacher successfully !",
   });
 };

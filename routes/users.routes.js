@@ -1,5 +1,9 @@
 const express = require("express");
 const router = express.Router();
+require("../config/passport").passport;
+// const auth = require("../middlewares/auth_middleware");
+// const isAuth = require('../middlewares/is-auth')
+
 
 const controller = require("../controllers/users.controller");
 
@@ -16,5 +20,10 @@ router.get("/:id", controller.getSingle);
 router.put("/:id", controller.update);
 //Delete User
 router.delete("/:id", controller.delete);
+
+//Login
+router.post("/login", controller.login);
+
+
 
 module.exports = router;

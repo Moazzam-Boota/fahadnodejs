@@ -1,6 +1,8 @@
 const Model = require("../models/users.model");
 const handeler = require("../middlewares/errorHandeler_middleware");
 var parseFullName = require("parse-full-name").parseFullName;
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 require("dotenv").config();
 
@@ -178,3 +180,35 @@ exports.createTeacher = (req, res, next) => {
       next(err);
     });
 };
+
+exports.login = (req, res, next) => {
+  const body = req.body;
+  if (!body.email || !body.password) {
+    const error = new Error("Validation failed, email & password is required");
+    error.statusCode = 400;
+    throw error;
+  }
+  return passport.authenticate(
+    "local",
+    { session: false },
+    (err, passportUser, info) => {
+      if (err) {
+        return res.status(404).json({
+          message: "Record not Found"
+        });
+      }
+      if (!passportUser) {
+        return res.status(400).send(info);
+      }
+      console.log("User LoggedIn Successfully!");
+
+      const user = passportUser;
+      accessToken = passportUser.generateJWT();
+      return res.json(user.toAuthJSON(accessToken,user));
+    }
+
+  )
+  (req, res, next);
+};
+
+
